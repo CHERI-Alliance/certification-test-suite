@@ -1,0 +1,2 @@
+#undef CHERIOT_CUSTOM_DEFAULT_MALLOC_CAPABILITY
+#include <stdlib.h>
