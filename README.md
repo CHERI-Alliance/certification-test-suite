@@ -4,6 +4,10 @@ CHERI Conformance Test Suite
 This is a (work-in-progress) test suite for CHERI Alliance CHERI Certification.
 It contains tests mostly inherited from the CHERI C test suite, with ones intended to test corner cases of CHERI MIPS behaviour removed, and the remainder cleaned up.
 
+The test suite contains a number of tests for different aspects of a CHERI system.
+Each of these includes one or more checks.
+All checks must pass for the test suite to be considered to have passed.
+
 Platform integration
 --------------------
 
@@ -63,3 +67,8 @@ If it supports only use-after-reuse protection, then you must define two macros:
 See the CheriBSD integration for an example of these.
 
 If your platform does not support temporal safety at all, you can define `EXCLUDE_TEMPORAL_SAFETY` to exclude these.
+
+### Reducing verbosity
+
+By default, the test suite will report every passed and failed check.
+If an integration defines `CHERI_TESTS_QUIET`, only completed tests and failed checks will be reported.
