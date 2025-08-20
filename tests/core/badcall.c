@@ -53,6 +53,13 @@ void tryInvalidFunctionPointer(fnptr fptr)
 	pass(trapped, "Calling invalid function pointer trapped");
 }
 
+volatile int calls = 12;
+
+void validCall()
+{
+	calls++;
+}
+
 BEGIN_TEST(badcall)
 	// Try calling something that is not a function pointer
 	fnptr x = (fnptr)(__uintcap_t)42;
@@ -61,4 +68,13 @@ BEGIN_TEST(badcall)
 	tryInvalidFunctionPointer(x);
 	// Function pointers default-initialised to 0 should trap.
 	tryInvalidFunctionPointer(not_a_function);
+	x = validCall;
+	x();
+	pass(calls == 13, "Valid function pointer was called");
+	x = cheri_tag_clear(x);
+	tryInvalidFunctionPointer(x);
+	x = validCall;
+	x = cheri_permissions_and(x, 0);
+	tryInvalidFunctionPointer(x);
+	pass(calls == 13, "Invalid function pointer was not called");
 END_TEST

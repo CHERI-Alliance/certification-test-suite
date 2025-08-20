@@ -45,7 +45,7 @@ void report_final_result(void)
 	write_log(" checks passed.\n\t");
 	write_number(testFailures);
 	write_log(" checks failed.\n");
-	int expectedPasses = 118;
+	int expectedPasses = 122;
 	// Capability overlap tests run tests for each subset write.
 	if (sizeof(void*) == 16)
 	{
